@@ -2,9 +2,10 @@
 
 from time import sleep
 
-# TODO: check for correct inputs
 
 def get_user_input() -> None:
+    """Retrieves the configs for the practice session via user input."""
+
     print("Hello and welcome to ....")
     sleep(1)
     print('''                                  
@@ -20,7 +21,11 @@ def get_user_input() -> None:
     sleep(1)
     print("Let's start!")
     print("First, choose how many exercises you would like to do.")
-    session_length = int(input("5, 10, or 15: "))
+
+    session_length = get_session_length()
+    if session_length == 0:
+        return
+
     print("Next, what operations would you like to include? Type Y or N to all that apply:")
     addition = input("Addition Y/N: ")
     subtraction = input("Subtraction Y/N: ")
@@ -29,9 +34,9 @@ def get_user_input() -> None:
     print("Got it! Finally, choose your difficulty: Beginner, Intermediate, or Expert?")
     difficult = input("Type 'B', 'I', or 'E': ")
     print("Now let's practice!")
-    sleep(5)
+    sleep(1)
     print("Sorry, no math coded yet. Here's a cookie instead:")
-    sleep(2)
+    sleep(1)
     print('''
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⡶⠾⠟⠻⠶⣶⣤⣤⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣾⠋⠁⢀⣠⣤⣤⣀⠀⠉⠛⠛⠛⠛⠛⠛⠿⢿⣿⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -65,3 +70,21 @@ def get_user_input() -> None:
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⣅⣿⣿⡛⢛⣛⣛⣓⡮⠻⠿⠿⠟⠋⢴⣋⣤⣯⣽⣶⣿⣿⡿⠟⠛⠛⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡿⣿⡟⠻⢿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣿⣿⠿⠛⠛⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     ''')
+
+
+def get_session_length() -> int:
+    """Retrieves session length from user input. Asks once before offering option to quit."""
+    for i in range(0, 7):
+        prompt = "Enter 5, 10, or 15: "
+        if i > 0:
+            prompt = f"{prompt[:-2]}, or 'Q to quit:"
+        user_input = input(prompt)
+        if user_input in ["5", "10", "15"]:
+            return int(user_input)
+        elif i > 0 and user_input.lower() == "q":
+            print("Ending session.")
+            return 0
+        else:
+            print("Please insert a valid answer")
+    return 0
+
