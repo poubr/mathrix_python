@@ -30,8 +30,10 @@ def get_user_input() -> None:
     if not list_of_operations:
         return
 
-    print("Got it! Finally, choose your difficulty: Beginner, Intermediate, or Expert?")
-    difficulty = input("Type 'B', 'I', or 'E': ")
+    difficulty = get_session_difficulty()
+    if not difficulty:
+        return
+
     print("Now let's practice!")
     sleep(1)
     print("Sorry, no math coded yet. Here's a cookie instead:")
@@ -117,3 +119,24 @@ def get_operations_list() -> list:
         print("You haven't selected anything to practice! Exiting...")
 
     return user_operations
+
+
+def get_session_difficulty() -> str:
+    """Retreives session difficulty from user input, returns an empty string if answer was not provided."""
+    print("Got it! Finally, choose your difficulty: Beginner, Intermediate, or Expert?")
+
+    for i in range(4):
+        prompt = "Type 'B', 'I', or 'E': "
+        if i > 0:
+            prompt = f"{prompt[:-2]}, or 'Q to quit: "
+        user_input = input(prompt)
+        if user_input.lower() in ["b", "i", "e"]:
+            return user_input.lower()
+        elif i > 0 and user_input.lower() == "q":
+            print("Ending session.")
+            return ""
+        elif i == 3:
+            print("It seems you don't want to practice math today! Exiting...")
+        else:
+            print("Please insert a valid answer.")
+    return ""
