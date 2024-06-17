@@ -1,7 +1,14 @@
 from input_handler import get_user_input
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    user_configuration = get_user_input()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+def main():
+    """Main function for running the code."""
+    user_configuration = get_user_input()
+    if not user_configuration:
+        return
+    print(user_configuration)
+
+
+if __name__ == '__main__':
+    main()
+
