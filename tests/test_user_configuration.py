@@ -40,9 +40,8 @@ def test_get_operations_list_user_quits() -> None:
 
 
 def test_get_operations_list_no_valid_input() -> None:
-    """Tests that the get_operations_list function  returns an empty list if user doesn't provide valid input."""
-    with patch("builtins.input", side_effect=["t", "h", "e", "r", "e"]):
+    """Tests that the get_operations_list function returns an empty list if user doesn't provide valid input."""
+    mock_inputs = ['x' for _ in range(16)]
+    with patch("builtins.input", side_effect=mock_inputs):
         mock_operations_list = get_operations_list()
         assert mock_operations_list == []
-
-s

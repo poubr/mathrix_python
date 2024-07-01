@@ -55,7 +55,7 @@ def get_operations_list() -> list:
         for i in range(4):
             prompt = f"{operation} Y/N: "
             if i > 0:
-                prompt = f"Type 'N' to choose {operation.lower()}, 'N' to skip {operation.lower()}, or 'q' to quit: "
+                prompt = f"Type 'Y' to choose {operation.lower()}, 'N' to skip {operation.lower()}, or 'q' to quit: "
             user_input = input(prompt)
             if user_input.lower() == "y":
                 user_operations.append(operation.lower())
