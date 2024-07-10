@@ -1,6 +1,6 @@
 """Module for testing user_configurtion.py's functions."""
-import user_configuration
-from user_configuration import get_session_length, get_operations_list
+
+from user_configuration import get_session_length, get_operations_list, get_session_difficulty
 from unittest.mock import patch
 
 
@@ -67,26 +67,3 @@ def test_get_session_difficulty_no_valid_answer() -> None:
     with patch("builtins.input", side_effect=["f", "r", "o", "d", "o"]):
         mock_session_length = get_session_difficulty()
         assert mock_session_length == 0
-
-
-
-def get_session_difficulty() -> int:
-    """Retrieves session difficulty from user input, returns an empty string if answer was not provided."""
-    print("Got it! Finally, choose your difficulty: Beginner, Intermediate, or Expert?")
-
-    for i in range(4):
-        prompt = "Type 'B', 'I', or 'E': "
-        if i > 0:
-            prompt = f"{prompt[:-2]}, or 'Q to quit: "
-        user_input = input(prompt)
-        if user_input.lower() in ["b", "i", "e"]:
-            difficulty = convert_difficulty_input(user_input.lower())
-            return difficulty
-        elif i > 0 and user_input.lower() == "q":
-            print("Ending session.")
-            return 0
-        elif i == 3:
-            print("It seems you don't want to practice math today! Exiting...")
-        else:
-            print("Please insert a valid answer.")
-    return 0
