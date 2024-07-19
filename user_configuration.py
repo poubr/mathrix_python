@@ -71,7 +71,9 @@ def get_operations_list() -> list:
     if not user_operations:
         print("You haven't selected anything to practice! Exiting...")
 
-    return user_operations
+    mapped_user_operations = convert_operations(user_operations)
+
+    return mapped_user_operations
 
 
 def get_session_difficulty() -> int:
@@ -109,3 +111,18 @@ def convert_difficulty_input(user_input: str) -> int:
     }
 
     return input_mapping[user_input]
+
+
+def convert_operations(operations: list) -> list:
+    """Converts the operations from tokens to the corresponding symbols."""
+
+    operations_mapping = {
+        "addition": "+",
+        "subtraction": "-",
+        "multiplication": "*",
+        "division": "/"
+    }
+
+    mapped_operations = [operations_mapping[operation] for operation in operations]
+
+    return mapped_operations
