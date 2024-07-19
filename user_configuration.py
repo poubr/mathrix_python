@@ -71,7 +71,7 @@ def get_operations_list() -> list:
     if not user_operations:
         print("You haven't selected anything to practice! Exiting...")
 
-    mapped_user_operations = convert_operations(user_operations)
+    mapped_user_operations = convert_operations_input(user_operations)
 
     return mapped_user_operations
 
@@ -104,16 +104,16 @@ def convert_difficulty_input(user_input: str) -> int:
     'i' (intermediate) == calculations within 100
     'e' (expert) == calculations within 1000
     """
-    input_mapping = {
+    difficulty_mapping = {
         "b": 20,
         "i": 100,
         "e": 1000
     }
 
-    return input_mapping[user_input]
+    return difficulty_mapping[user_input]
 
 
-def convert_operations(operations: list) -> list:
+def convert_operations_input(operations: list) -> list:
     """Converts the operations from tokens to the corresponding symbols."""
 
     operations_mapping = {

@@ -1,7 +1,13 @@
 """Module for testing user_configurtion.py's functions."""
 import pytest
 
-from user_configuration import get_session_length, get_operations_list, get_session_difficulty, convert_difficulty_input
+from user_configuration import (
+    convert_difficulty_input,
+    convert_operations_input,
+    get_operations_list,
+    get_session_difficulty,
+    get_session_length,
+)
 from unittest.mock import patch
 
 
@@ -70,14 +76,30 @@ def test_get_session_difficulty_no_valid_answer() -> None:
         assert mock_session_length == 0
 
 
-input_mapper = [
+difficulty_mapping = [
     ("b", 20),
     ("i", 100),
     ("e", 1000)
 ]
 
 
-@pytest.mark.parametrize("input_key, expected_value", input_mapper)
-def convert_difficulty_input(input_key, expected_value):
+@pytest.mark.parametrize("input_key, expected_value", difficulty_mapping)
+def test_convert_difficulty_input(input_key, expected_value) -> None:
+    """Tests that the convert_difficulty method works as expected."""
     actual_value = convert_difficulty_input(input_key)
     assert actual_value == expected_value
+
+
+operations_mapping = [
+    (["addition", "subtraction"], ["+", "-"]),
+    (["multiplication", "division"], ["*", "/"]),
+    (["addition", "multiplication", "division"], ["+", "*", "/"]),
+    (["addition", "subtraction", "multiplication", "division"], ["+", "-", "*", "/"])
+]
+
+
+@pytest.mark.parametrize("input_operations, expected_symbols", operations_mapping)
+def test_convert_operations_input(input_operations, expected_symbols) -> None:
+    """Tests that the convert_operations_input method works as expected."""
+    actual_symbols = convert_operations_input(input_operations)
+    assert actual_symbols == expected_symbols
