@@ -30,7 +30,7 @@ def test_get_operations_list() -> None:
     """Tests that the get_operations_list function returns the correct input."""
     with patch("builtins.input", side_effect=["Y", "N", "Y", "N"]):
         mock_operations_list = get_operations_list()
-        assert mock_operations_list == ["addition", "multiplication"]
+        assert mock_operations_list == ["+", "*"]
 
 
 def test_get_operations_list_user_quits() -> None:
