@@ -2,7 +2,8 @@
 
 from random import choice
 
-class SessionManger:
+
+class SessionManager:
     """
     Generates exercises for the practice session.
     Args: user_session: dictionary containing user configuration.
@@ -17,6 +18,7 @@ class SessionManger:
     def generate_exercises(self):
         """Wrapper method for generating exercises."""
         exercises_per_operation = self.get_exercises_per_operations()
+        print(exercises_per_operation)
 
     def get_exercises_per_operations(self) -> dict:
         """
